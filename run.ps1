@@ -15,7 +15,7 @@ if (-not (Test-Path .git)) {
     git init
     Write-Host "Repositorio Git inicializado."
 }
-
+Copy-Item .\.env .\.env.example
 # Agregar archivos a la etapa de preparación
 git add .
 
