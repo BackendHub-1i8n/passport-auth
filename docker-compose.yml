@@ -1,0 +1,14 @@
+version: '3.3'
+
+services:
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=storedb
+      - MYSQL_USER=kevin
+      - MYSQL_PASSWORD=k3v1n
+    ports:
+      - 3307:3306
+    volumes:
+      - ./src/storedb-data:/var/lib/mysql
