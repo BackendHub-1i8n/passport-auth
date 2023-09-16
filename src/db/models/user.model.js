@@ -1,8 +1,9 @@
-import { Sequelize, Model, DataTypes } from 'sequelize';
+import { Model, DataTypes, Sequelize } from 'sequelize';
 
-export const USER_TABLE = 'Clients';
+export const USER_TABLE = 'users';
 
-export const clientSchema = {
+// le ayuda a sequelize a ver como debe crear la tabla
+export const userSchema = {
   id: {
     allowNull: true,
     autoIncrement: true,
@@ -10,30 +11,46 @@ export const clientSchema = {
     type: DataTypes.INTEGER,
   },
   name: {
-    allowNull:false,
-    type:DataTypes.STRING
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
+  lastName: {
+    field: 'last_name',
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   email: {
-    allowNull:false,
-    type:DataTypes.STRING
+    allowNull: false,
+    type: DataTypes.STRING,
+    unique: true,
   },
   password: {
-    allowNull:false,
-    type:DataTypes.STRING
+    allowNull: false,
+    type: DataTypes.STRING,
   },
   profile: {
-    allowNull:true,
-    type:DataTypes.BLOB
+    allowNull: true,
+    type: DataTypes.BLOB,
   },
 };
 
-export class Client extends Model {
-  static associate() {}
-  static config(sequelise) {
+export class User extends Model {
+  static associate(models) {
+    this.hasMany(models.Publication, {
+      as: 'Publications',
+      foreignKey: 'author',
+    });
+    this.hasMany(models.Commentary, {
+      as: 'Comentaries',
+      foreignKey: 'author',
+    });
+  }
+
+  static config(sequelize) {
     return {
-      sequelise,
+      sequelize,
       tableName: USER_TABLE,
-      modelName: 'Client',
+      modelName: 'User',
       timestamps: true,
     };
   }
