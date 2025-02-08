@@ -1,6 +1,7 @@
 import './utils/auth/index'
 import { join } from "path";
 import userRoutes from './routes/user.routes'
+import viewsRoutes from './routes/view.route'
 import express, { Request, Response, Application } from "express";
 import morgan from "morgan";
 import session from 'express-session';
@@ -14,9 +15,6 @@ export const app: Application = express()
 app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
-
-console.log(configutations.redisUrl);
-
 
 const redisClient = createClient({
   url: configutations.redisUrl as string
@@ -48,26 +46,10 @@ app.use(passport.session())
 app.use('/api', userRoutes)
 
 
-// app.set('view engine', 'ejs');
-// app.set('views', join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.set('views', join(__dirname, 'views'));
+
+app.use('/', viewsRoutes)
 
 
-// app.get('/', (req: Request, res: Response) => {
-//   res.render('pages/index', { title: 'Express', user: 'Kevin' })
-// })
 
-// app.get('/about', (req: Request, res: Response) => {
-//   res.render('pages/about', { title: 'Express', user: 'Kevin' })
-// })
-
-// // app.get('/view/login', (req: Request, res: Response) => {
-// //   res.render('pages/login', { title: 'Express', user: 'Kevin' })
-// // })
-
-// app.get('/profile', (req, res) => {
-//   res.render('profile', {
-//     name: 'Kevin',
-//     age: 25,
-//     hobbies: ['Programar', 'Leer', 'Jugar']
-//   });
-// });
