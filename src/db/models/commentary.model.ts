@@ -1,6 +1,6 @@
-import { DataTypes, Model } from 'sequelize';
-import { USER_TABLE } from './user.model.js';
-import { PUBLICATION_TABLE } from './publication.model.js';
+import { DataTypes, Model, Sequelize } from 'sequelize';
+import { USER_TABLE } from './user.model';
+import { PUBLICATION_TABLE } from './publication.model';
 export const COMMENTARY_TABLE = 'commentaries';
 
 export const commentarySchema = {
@@ -38,12 +38,12 @@ export const commentarySchema = {
 };
 
 export class Commentary extends Model {
-  static associate(models) {
+  static associate(models: any) {
     this.belongsTo(models.User, { as: 'belongs_To_Author' });
     this.belongsTo(models.Publication, { as: 'publication' });
   }
 
-  static config(sequelize) {
+  static config(sequelize: Sequelize) {
     return {
       sequelize,
       tableName: COMMENTARY_TABLE,

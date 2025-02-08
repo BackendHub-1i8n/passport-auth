@@ -32,10 +32,19 @@ export const userSchema = {
     allowNull: true,
     type: DataTypes.BLOB,
   },
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  }
 };
 
+
+interface AssociateModels {
+  [key: string]: Model;
+}
+
 export class User extends Model {
-  static associate(models) {
+  static associate(models: any) {
     this.hasMany(models.Publication, {
       as: 'Publications',
       foreignKey: 'author',
@@ -46,7 +55,7 @@ export class User extends Model {
     });
   }
 
-  static config(sequelize) {
+  static config(sequelize: Sequelize) {
     return {
       sequelize,
       tableName: USER_TABLE,

@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 
-const encrypt = async (password) => {
+const encrypt = async (password: string) => {
   //* encripta la contraceña
   const hash = await bcrypt.hash(password, 10);
   //* compara la contraceña encriptada con la contraceña que se envia por el body

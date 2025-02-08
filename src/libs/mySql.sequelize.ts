@@ -1,6 +1,6 @@
-import { configutations } from '../config/app.config.js';
+import { configutations } from '../config/app.config';
 import { Sequelize } from 'sequelize';
-import { setupModels } from '../db/models/index.js';
+import { setupModels } from '../db/models/index';
 
 const USER = encodeURIComponent(configutations.dbUser);
 const PASSWORD = encodeURIComponent(configutations.dbPassword);

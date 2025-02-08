@@ -1,6 +1,7 @@
-import { configutations } from '../config/app.config.js';
+import { NextFunction, Request, Response } from 'express';
+import { configutations } from '../config/app.config';
 
-export function checkApyKey(req, res, next) {
+export function checkApyKey(req: Request, res: Response, next: NextFunction) {
   const api = req.headers['api'];
   console.log(configutations.apiKey);
   if (api === configutations.apiKey) {

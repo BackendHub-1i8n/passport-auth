@@ -1,8 +1,14 @@
-import { configutations } from '../config/app.config.js';
+import { configutations } from '../config/app.config';
 import jwt from 'jsonwebtoken';
-const tokenSecret = configutations.jwtSecret;
+const tokenSecret = configutations.jwtSecret as string;
 
-export function generateToken(payload) {
+interface Payload {
+  sub: number;
+  email: string;
+  role: string;
+}
+
+export function generateToken(payload: Payload): Promise<string | undefined> {
   return new Promise((resolve, reject) => {
     jwt.sign(
       payload,

@@ -1,5 +1,5 @@
-import { Model, DataTypes } from 'sequelize';
-import { USER_TABLE } from './user.model.js';
+import { Model, DataTypes, Sequelize } from 'sequelize';
+import { USER_TABLE } from './user.model';
 
 export const PUBLICATION_TABLE = 'publications';
 
@@ -31,11 +31,11 @@ export const publicationSchema = {
 };
 
 export class Publication extends Model {
-  static associate(models) {
+  static associate(models: any) {
     this.belongsTo(models.User, {as:'belongs_To_Author'})
     this.hasMany(models.Commentary, {as:'Commentaries', foreignKey:'publicationId'} )
   }
-  static config(sequelize) {
+  static config(sequelize: Sequelize) {
     return {
       sequelize,
       tableName: PUBLICATION_TABLE,

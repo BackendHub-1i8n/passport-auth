@@ -1,0 +1,13 @@
+<h1>Perfil de <%= name %>
+</h1>
+<p>Edad: <%= age %>
+</p>
+
+<h3>Hobbies:</h3>
+<ul>
+  <% hobbies.forEach(hobby=> { %>
+    <li>
+      <%= hobby %>
+    </li>
+    <% }); %>
+</ul>
